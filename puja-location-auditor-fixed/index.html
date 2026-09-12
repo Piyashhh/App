@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <title>Puja Location Auditor</title>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Puja Location Auditor</h1>
+      <div id="fileInfo" class="muted">Load your merged Excel file to begin.</div>
+    </div>
+    <div class="top-actions">
+      <label class="button primary">
+        Load Excel
+        <input id="fileInput" type="file" accept=".xlsx,.xls" hidden>
+      </label>
+      <button id="exportBtn" class="button" disabled>Export audited Excel</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="list-panel">
+      <div class="list-tools">
+        <input id="searchInput" placeholder="Search puja name, club, code…" disabled>
+        <div id="count" class="muted">0 entries</div>
+      </div>
+      <div id="entryList" class="entry-list">
+        <div class="empty">No Excel file loaded.</div>
+      </div>
+    </aside>
+
+    <section class="detail-panel">
+      <div id="emptyDetail" class="empty detail-empty">Select an entry from the list.</div>
+      <div id="detail" hidden>
+        <div class="detail-head">
+          <div>
+            <div id="entryCode" class="eyebrow"></div>
+            <h2 id="entryName"></h2>
+            <div id="entryClub" class="muted"></div>
+            <div id="entryAddress" class="address"></div>
+          </div>
+          <div class="nav-actions">
+            <button id="prevBtn" class="button">← Previous</button>
+            <button id="nextBtn" class="button">Next →</button>
+          </div>
+        </div>
+
+        <hr>
+        <h3>Check the four candidate locations</h3>
+        <p class="muted">Open each available pin in Google Maps, then choose the one that matches the actual pandal/location.</p>
+        <div id="candidateGrid" class="candidate-grid"></div>
+
+        <section class="verify-box">
+          <h3>Record decision</h3>
+          <div class="choice-row">
+            <label><input type="radio" name="decision" value="candidate"> Selected candidate above</label>
+            <label><input type="radio" name="decision" value="corrected"> I have the correct Google Maps link</label>
+          </div>
+          <div id="candidateSelectWrap" class="field">
+            <label for="candidateSelect">Correct candidate</label>
+            <select id="candidateSelect">
+              <option value="">Choose D1 / D2 / D4 / Google Maps…</option>
+            </select>
+          </div>
+          <div id="correctedWrap" class="field" hidden>
+            <label for="correctedLink">Correct Google Maps link</label>
+            <input id="correctedLink" type="url" inputmode="url" placeholder="https://maps.google.com/...">
+          </div>
+          <div class="save-row">
+            <button id="saveBtn" class="button primary" disabled>Save verification</button>
+            <span id="savedNote" class="muted"></span>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
